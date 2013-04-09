@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>EHCP - {myip}</title>	
+	<link href="{stylefile}" type="text/css" rel="stylesheet">
+
+</head><body>
+
+<!-- left -->
+<div style="height: 100%;" id="divLeft">
+
+<div id="divMenuSearch">
+<form method=post action="index.php?op=listdomains">
+<input type=text name=aranan value='' id="inputMenuSearch">
+<select name='arananalan' id="selectMenuSearch">
+	<option value='domainname' >Domain</option>
+	<option value='reseller' >Reseller</option>
+	<option value='panelusername' >Username</option>
+	<option value='id' >id</option>
+	<option value='status' >status</option>
+	<option value='comment' >comment</option>
+</select>
+<input type=submit value=Search id="submitMenuSearch">
+</form>
+</div>
+<br />&nbsp;
+
+<div id="divMenu">
+<table id="Table1" border="0" cellpadding="0" cellspacing="0" width="185">
+<tbody><tr>
+	<td colspan="3" class="InfoPaneHeader" id="tdInfoActivity" width="185">Main Menu</td>
+</tr>
+<tr>
+	<td class="InfoPaneFrame" width="1"><img src="1x1.gif" height="1" width="1"></td>
+	<td class="InfoPaneRow" width="183">
+	<a href="index.php?op=deselectdomain"><b>Home</b></a><br>
+	<a href="index.php?op=resellers"><b>Resellers</b></a><br>
+	<a href="index.php?op=listpanelusers"><b>Clients</b></a><br>
+	<a href="index.php?op=selectdomain"><b>Domains</b></a><br>
+	<a href="index.php?op=adddomaineasy">Easy add domain</a><br>
+	<a href="index.php?op=adddomain">Add domain</a><br><br>
+
+	<a href="?op=otheroperations">Old Menu</a>
+	<br />&nbsp;
+	</td>
+	<td class="InfoPaneFrame" width="1"><img src="1x1.gif" height="1" width="1"></td>
+</tr>
+
+<tr>
+	<td colspan="3" class="InfoPaneFrame" width="185"></td>
+</tr>
+</tbody></table>
+</div>
+<br />&nbsp;
+
+<div id="divMenu">
+<table id="Table1" border="0" cellpadding="0" cellspacing="0" width="185">
+<tbody><tr>
+	<td colspan="3" class="InfoPaneHeader" id="tdInfoActivity" width="185">Tools</td>
+</tr>
+<tr>
+	<td class="InfoPaneFrame" width="1"><img src="1x1.gif" height="1" width="1"></td>
+	<td class="InfoPaneRow" width="183">
+	<a target="_blank" href="webmail">Webmail</a><br>
+	<a target="_blank" href="/phpmyadmin">Phpmyadmin</a><br>
+	<a target="_blank" href="net2ftp">WebFtp</a>
+
+	<br />&nbsp;
+	</td>
+	<td class="InfoPaneFrame" width="1"><img src="1x1.gif" height="1" width="1"></td>
+</tr>
+
+<tr>
+	<td colspan="3" class="InfoPaneFrame" width="185"></td>
+</tr>
+</tbody></table>
+</div>
+
+<br />&nbsp;
+
+<div id="divMenu">
+<table id="Table1" border="0" cellpadding="0" cellspacing="0" width="185">
+<tbody><tr>
+	<td colspan="3" class="InfoPaneHeader" id="tdInfoActivity" width="185">System</td>
+</tr>
+<tr>
+	<td class="InfoPaneFrame" width="1"><img src="1x1.gif" height="1" width="1"></td>
+	<td class="InfoPaneRow" width="183">	
+	<a target="_blank" href="sysinfo">Sysinfo</a><br>
+	<a href="index.php?op=options"><b>Options</b></a><br>
+	<a href="index.php?op=changetemplate">Templates</a><br>
+	<a href="http://www.ehcp.net" target="_blank">EHCP Home</a><br><br>
+	<a href="?op=logout"><b>Logout</b></a>
+	<br />&nbsp;
+	</td>
+	<td class="InfoPaneFrame" width="1"><img src="1x1.gif" height="1" width="1"></td>
+</tr>
+
+<tr>
+	<td colspan="3" class="InfoPaneFrame" width="185"></td>
+</tr>
+</tbody></table>
+</div>
+<div id="divCopy">
+Powered by <a href="http://www.ehcp.net/" target="_blank">EHCP</a>
+</div>
+</div>
+
+<!-- right -->
+<div id="divMainRightHeader"><div id="divBanner"><span style="align: right;">Welcome, <b>{username}</b>! <a href="?op=logout">Log Out</a></span><br />{banner}</div></div>
+<div id="divMainContainer">
+<div id="divMain" align="left">
+      
+      {selecteddomain}      
+      {ickisim}
+
+</div>
+</div>
+</body></html>

@@ -1,0 +1,57 @@
+<!-- <h1>Server Admin Main Menu</h1> -->
+<!--
+Icons:
+http://www.iconspedia.com/pack/nx10-1-6/
+http://www.iconspedia.com/pack/devcom-network-347/
+http://www.iconspedia.com/pack/crystal-clear-actions-1303/
+http://www.iconspedia.com/pack/soft-17-0/
+-->
+<table id="tblcontent"><tr>
+<td>
+<div class="content">
+<div class="title"><img src="{templatedir}/domain.png"> Domains</div>
+      <ul>
+       <li><a href="?op=selectdomain"><b>List Domains</b></a></li>
+       <li><a href="?op=adddomain"><b>Add domain</b></a> (<a href="?op=adddomaineasy">Easy add</a>, <a href="?op=addDomainToThisPaneluser">Add to this ftp user</a>, <a href="?op=bulkadddomain">Bulk add</a>)</li>
+       <li><a href="?op=adddnsonlydomain">Add <b>dns only</b> DOMAIN(hosting)</a></li>       
+        <li><a href="?op=listpassivedomains">List passive domains and new domain applications</a></li>        
+      </ul>
+
+</div>
+<br />
+</td><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/users.png"> Users</div>
+      <ul>
+        <li><a href="?op=listallftpusers"><b>Ftp</b> Users</a> (<a href="?op=listallftpusers">list</a>, <a href="?op=addftpuser">add</a>)</li>
+        <li><a href="?op=listallemailusers"><b>Email</b> Users</a> (<a href="?op=listallemailusers">list</a>, <a href="?op=addemailuser">add</a>)</li>
+        <li><a href="?op=listpanelusers"><b>Panel</b> Users</a> (<a href="?op=listpanelusers">list</a>, <a href="?op=addpaneluser">add</a>)</li>
+        <li><a href="?op=domainop&amp;action=listdb"><b>Mysql</b> db</a> (<a href="?op=domainop&amp;action=listdb">list</a>, <a href="?op=addmysqldb">add</a>)</li>
+      </ul>
+
+</div>
+<br />
+</td></tr><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/system.png"> System</div>
+      <ul>
+        <li><a href="?op=dosyncdns"><b>Reload DNS</b> zones</a></li>
+        <li><a href="?op=dosyncdomains">Sync domains</a></li>
+        <li><a href="index.php?op=dobackup"><b>Backup</b> Server</a> (<a href="index.php?op=listbackups">List backups</a>, <a href="index.php?op=dorestore">Restore</a>)</li>
+        <li><a href="?op=operations">List Completed/pending daemon operations</a></li>
+        <li><a href="?op=options"><b>Options</b></a>, <a href="?op=changetemplate">Templates</a>, <a href="?op=changemypass">Change password</a></li>
+
+      </ul>
+
+</div>
+<br />
+</td><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/info.png"> Info</div>
+<div style="position: relative; top:-25px; left:5px;">
+<font class="hidethis">
+{dynamicinfo}
+</div>
+</div>
+</td></tr>
+</table>

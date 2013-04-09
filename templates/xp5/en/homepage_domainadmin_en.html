@@ -1,0 +1,85 @@
+<!-- <h1>Server Admin Main Menu</h1> -->
+<!--
+Icons:
+http://www.iconspedia.com/pack/nx10-1-6/
+http://www.iconspedia.com/pack/devcom-network-347/
+http://www.iconspedia.com/pack/crystal-clear-actions-1303/
+http://www.iconspedia.com/pack/soft-17-0/
+-->
+<table id="tblcontent"><tr>
+<td>
+<div class="content">
+<div class="title"><img src="{templatedir}/domain.png"> Domain Operations</div>
+      <ul>
+	<li><a href="?op=listdomains">List Domains</a></li>
+        <li><a href="?op=customhttp">Custom http </a></li>
+        <li><a href="?op=customdns">Custom dns </a></li>
+	<li><a href="?op=subdomains">SubDomains </a></li>
+	<li><a href="?op=directories">Password Protected Directories </a></li>
+      </ul>
+
+</div>
+<br />
+</td><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/ftp.png"> FTP</div>
+      <ul>
+        <li><a href="?op=listallftpusers">List Ftp Users / Change Password</a></li>      
+	<li><a href="?op=editftpuser">Change FTP Password / Settings</a></li>
+        <li><a href="net2ftp" target="_blank">WebFTP</a></li>
+      </ul>
+<br /><br />
+</div>
+<br />
+</td></tr><tr><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/email.png"> Email</div>
+      <ul>
+        <li><a href="?op=listemailusers">List Email Users / Change Passwords</a></li>
+        <li><a href="?op=addemailuser">Add Email User</a></li>
+        <li><a href="?op=emailforwardings">List/Add email forwardings</a></li>
+
+      </ul>
+<br />
+</div>
+<br />
+</td><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/mysql.png"> MySQL</div>
+<ul>
+        <li><a href="?op=addmysqldb">Add Mysql Db&amp;dbuser</a></li>
+        <li><a href="?op=addmysqldbtouser">Add Mysql db to existing dbuser</a></li>
+        <li><a href="?op=dbadduser">Add Mysql user to existing db</a></li>
+        <li><a href="?op=domainop&amp;action=listdb">List / Delete Mysql Db's</a></li>
+
+</ul>
+</div>
+<br />
+</td></tr>
+<tr><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/other.png"> Other</div>
+      <ul>
+        <li><a href="?op=addscript">Easy install scripts</a></li>
+        <li><a target="_blank" href="http://www.{selecteddomain}/webstats">Webstats</a></li>
+      </ul>
+<br /><br /><br />
+</div>
+<br />
+</td><td>
+<div class="content">
+<div class="title"><img src="{templatedir}/settings.png"> Domain Settings</div>
+<ul>
+        <li><a href="?op=editdomain">Activate / De-activate domain</a></li>
+        <li><a href="?op=transferdomain">Transfer domain</a></li>
+        <li><a href="?op=addredirect">Redirect To Another domain/url</a></li>
+	<li><a href="?op=changemypass">Change my password</a></li>
+</ul>
+</div>
+</td></tr>
+</table>
+<div class="footer">
+<pre>
+{banner}
+</pre>
+</div>

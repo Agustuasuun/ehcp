@@ -1,0 +1,196 @@
+		
+                <div id="boxes">
+
+<div id="pref" class="itembox">
+  <div id="pref-bdrop" class="celldrop">&nbsp;</div>
+  <div class="cellbox">
+  			
+            <h6   id="pref-header" title="Double click to collapse/expand.  Click to drag." style="clear:none;" ondblclick="rollbox(this);" class="ie-hover"><div id="pref-expander"  class="box-collapse-control" style="float:right" onClick="rollbox(this);">&nbsp;</div>Preferences</h6>
+            <div id="pref-body">
+                
+                <div searchtext="started" class="item">
+                <a class="itemlink" href="?op=options&edit=1"><div border="0" class="spriteicon_img" id="icon-getstart" ></div></a>
+                <a id="item_getstart"  href="?op=options&edit=1">Edit/Change Options</a>
+                </div>
+
+                <div searchtext="password change" class="item">
+                <a class="itemlink" href="?op=changemypass"><div border="0" class="spriteicon_img" id="icon-password" ></div></a>
+                <a id="item_password" href="?op=changemypass">Change Password</a>
+                </div>
+
+                <div searchtext="email" class="item">
+                <a class="itemlink" href="?op=dosyncdns"><div border="0" class="spriteicon_img" id="icon-updatecontact" ></div></a>
+                <a id="item_updatecontact"  href="?op=dosyncdns">Sync DNS/Update Zone Files</a>
+                </div>
+
+                <div searchtext="skin theme" class="item">
+                <a class="itemlink" href="?op=dosyncdomains"><div border="0" class="spriteicon_img" id="icon-lookandfeel" ></div></a>
+                <a id="item_lookandfeel" href="?op=dosyncdomains">Sync Domains </a>
+                </div>
+
+
+
+       <div class="clearit">&nbsp;</div>
+   </div>
+  </div>
+  <div id="pref-adrop" class="celldrop">&nbsp;</div>
+</div>
+
+
+<div id="mail" class="itembox">
+  <div id="mail-bdrop" class="celldrop">&nbsp;</div>
+  <div class="cellbox">
+  			
+            <h6   id="mail-header" title="Double click to collapse/expand.  Click to drag." style="clear:none;" ondblclick="rollbox(this);" class="ie-hover"><div id="mail-expander"  class="box-collapse-control" style="float:right" onClick="rollbox(this);">&nbsp;</div>Mail</h6>
+            <div id="mail-body">
+                
+                <div searchtext="pop imap smtp new account" class="item">
+                <a class="itemlink" href="?op=listemailusers"><div border="0" class="spriteicon_img" id="icon-manageaccounts" ></div></a>
+                <a id="item_manageaccounts" onclick="icFAA('manageaccounts');;return true;"  href="?op=listemailusers">Email Accounts</a>
+                </div>
+
+                <div searchtext="webmail" class="item">
+                <a class="itemlink" href="webmail"><div border="0" class="spriteicon_img" id="icon-webemail" ></div></a>
+                <a id="item_webemail" href="webmail">Webmail</a>
+                </div>
+
+
+                <div searchtext="forwarders forward" class="item">
+                <a class="itemlink" href="?op=emailforwardings"><div border="0" class="spriteicon_img" id="icon-forwardersemail" ></div></a>
+                <a id="item_forwardersemail"  href="?op=emailforwardings">Forwarders</a>
+                </div>
+
+
+       <div class="clearit">&nbsp;</div>
+   </div>
+  </div>
+  <div id="mail-adrop" class="celldrop">&nbsp;</div>
+</div>
+
+
+<div id="software" class="itembox">
+  <div id="software-bdrop" class="celldrop">&nbsp;</div>
+  <div class="cellbox">
+  			
+            <h6   id="software-header" title="Double click to collapse/expand.  Click to drag." style="clear:none;" ondblclick="rollbox(this);" class="ie-hover"><div id="software-expander"  class="box-collapse-control" style="float:right" onClick="rollbox(this);">&nbsp;</div>Software / Services / Ftp</h6>
+            <div id="software-body">
+                
+
+
+                <div searchtext="addons software" class="item">
+                <a class="itemlink" href="?op=editftpuser"><div border="0" class="spriteicon_img" id="icon-scripts-library" ></div></a>
+                <a id="item_scripts-library" href="?op=editftpuser">Change Ftp password</a>
+                </div>
+
+                <div searchtext="ftp create" class="item">
+                <a class="itemlink" target="_blank" href="net2ftp"><div border="0" class="spriteicon_img" id="icon-ftpaccounts" ></div></a>
+                <a id="item_ftpaccounts" target="_blank" href="net2ftp">WebFTP</a>
+                </div>
+
+
+                <div searchtext="analog" class="item">
+                <a class="itemlink" target="_blank" href="webstats"><div border="0" class="spriteicon_img" id="icon-analogstats" ></div></a>
+                <a id="item_analogstats" target="_blank" href="webstats">WebStats</a>
+                </div>
+
+                <div searchtext="file manager file-manager" class="item">
+                <a class="itemlink" href="?op=addscript"><div border="0" class="spriteicon_img" id="icon-filemanager" ></div></a>
+                <a id="item_filemanager"  href="?op=addscript">Easy Install Scripts</a>
+                </div>
+
+
+       <div class="clearit">&nbsp;</div>
+   </div>
+  </div>
+  <div id="software-adrop" class="celldrop">&nbsp;</div>
+</div>
+
+
+
+<div id="domains" class="itembox">
+  <div id="domains-bdrop" class="celldrop">&nbsp;</div>
+  <div class="cellbox">
+  			
+            <h6   id="domains-header" title="Double click to collapse/expand.  Click to drag." style="clear:none;" ondblclick="rollbox(this);" class="ie-hover"><div id="domains-expander"  class="box-collapse-control" style="float:right" onClick="rollbox(this);">&nbsp;</div>Domains</h6>
+            <div id="domains-body">
+                
+                <div searchtext="domain" class="item">
+                <a class="itemlink" href="?op=subdomains"><div border="0" class="spriteicon_img" id="icon-subdomains" ></div></a>
+                <a id="item_subdomains" href="?op=subdomains">Subdomains</a>
+                </div>
+
+                <div searchtext="domain" class="item">
+                <a class="itemlink" href="?op=customhttp"><div border="0" class="spriteicon_img" id="icon-addondomain" ></div></a>
+                <a id="item_addondomain"  href="?op=customhttp">Custom http</a>
+                </div>
+
+                <div searchtext="domain" class="item">
+                <a class="itemlink" href="?op=customdns"><div border="0" class="spriteicon_img" id="icon-parkeddomains" ></div></a>
+                <a id="item_parkeddomains"  href="?op=customdns">Custom dns</a>
+                </div>
+
+                <div searchtext="rewrite modrewrite" class="item">
+                <a class="itemlink" href="?op=addredirect"><div border="0" class="spriteicon_img" id="icon-redirects" ></div></a>
+                <a id="item_redirects"  href="?op=addredirect">Redirects</a>
+                </div>
+
+                <div searchtext="errorlog error_log error log" class="item">
+                <a class="itemlink" href="?op=deletedomain"><div border="0" class="spriteicon_img" id="icon-errorlogs" ></div></a>
+                <a id="item_errorlogs"  href="?op=deletedomain">Delete Domain</a>
+                </div>
+                
+                <div searchtext="anonymousftp ftp" class="item">
+                <a class="itemlink" href="?op=transferdomain"><div border="0" class="spriteicon_img" id="icon-anonymousmsg" ></div></a>
+                <a id="item_anonymousmsg"  href="?op=transferdomain">Transfer domain/hosting to another panel user</a>
+                </div>
+
+
+       <div class="clearit">&nbsp;</div>
+   </div>
+  </div>
+  <div id="domains-adrop" class="celldrop">&nbsp;</div>
+</div>
+
+
+<div id="db" class="itembox">
+  <div id="db-bdrop" class="celldrop">&nbsp;</div>
+  <div class="cellbox">
+  			
+            <h6   id="db-header" title="Double click to collapse/expand.  Click to drag." style="clear:none;" ondblclick="rollbox(this);" class="ie-hover"><div id="db-expander"  class="box-collapse-control" style="float:right" onClick="rollbox(this);">&nbsp;</div>Databases</h6>
+            <div id="db-body">
+                
+                <div searchtext="mysql database" class="item">
+                <a class="itemlink" href="?op=domainop&action=listdb"><div border="0" class="spriteicon_img" id="icon-mysql" ></div></a>
+                <a id="item_mysql" href="?op=domainop&action=listdb">MySQL&reg; Databases</a>
+                </div>
+
+                <div searchtext="mysql database" class="item">
+                <a class="itemlink" href="?op=addmysqldb"><div border="0" class="spriteicon_img" id="icon-mysql-wizard3" ></div></a>
+                <a id="item_mysql-wizard3"  href="?op=addmysqldb">Add Mysql Db&dbuser</a>
+                </div>
+
+                <div searchtext="mysql database" class="item">
+                <a target="_blank" class="itemlink" target=_blank href="phpmyadmin"><div border="0" class="spriteicon_img" id="icon-phpMyAdmin" ></div></a>
+                <a id="item_phpMyAdmin" target="_blank" href="phpmyadmin">phpMyAdmin</a>
+                </div>
+
+                <div searchtext="remote mysql" class="item">
+                <a class="itemlink" href="?op=addmysqldbtouser"><div border="0" class="spriteicon_img" id="icon-mysql-remoteaccess" ></div></a>
+                <a id="item_mysql-remoteaccess"  href="?op=addmysqldbtouser">Add Mysql db to existing dbuser</a>
+                </div>
+
+                <div searchtext="remote mysql" class="item">
+                <a class="itemlink" href="?op=dbadduser"><div border="0" class="spriteicon_img" id="icon-mysql-remoteaccess" ></div></a>
+                <a id="item_mysql-remoteaccess"  href="?op=dbadduser">Add Mysql user to existing db</a>
+                </div>
+                
+
+       <div class="clearit">&nbsp;</div>
+   </div>
+  </div>
+  <div id="db-adrop" class="celldrop">&nbsp;</div>
+</div>
+
+
+                </div>	
+<div class="clearit">&nbsp;</div>
