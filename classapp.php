@@ -5069,7 +5069,7 @@ function showSimilarFunctions($func){
 	<br><a href='?op=dosyncftp'>Sync Ftp (for non standard home dirs)</a><br>
 	<hr><a href='?op=advancedsettings'>Advanced Settings</a><br><br>
 	<br><a href='?op=dofixmailconfiguration'>Fix Mail Configuration<br>Fix ehcp Configuration</a> (This is used after changing ehcp mysql user pass, or if you upgraded from a previous version, in some cases)<br>
-	<br><a href='?op=dofixapacheconfigssl'>Fix apache Configuration with ssl</a>
+	<!-- <br><a href='?op=dofixapacheconfigssl'>Fix apache Configuration with ssl</a> -->
 	<br><a href='?op=dofixapacheconfignonssl'>Fix apache Configuration without ssl</a>
 	<br>
 	<hr>
