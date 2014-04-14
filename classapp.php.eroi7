@@ -5069,7 +5069,7 @@ function showSimilarFunctions($func){
 	<br><a href='?op=dosyncftp'>Sync Ftp (for non standard home dirs)</a><br>
 	<hr><a href='?op=advancedsettings'>Advanced Settings</a><br><br>
 	<br><a href='?op=dofixmailconfiguration'>Fix Mail Configuration<br>Fix ehcp Configuration</a> (This is used after changing ehcp mysql user pass, or if you upgraded from a previous version, in some cases)<br>
-	<!-- <br><a href='?op=dofixapacheconfigssl'>Fix apache Configuration with ssl</a> -->
+	<br><a href='?op=dofixapacheconfigssl'>Fix apache Configuration with ssl</a>
 	<br><a href='?op=dofixapacheconfignonssl'>Fix apache Configuration without ssl</a>
 	<br>
 	<hr>
@@ -8947,13 +8947,11 @@ function new_sync_all(){
 
 function build_logrotate_conf($arr2,$host){	
 	if($this->debuglevel>0) print_r($arr2);
-	$logrotate="# jason was here\n";	
+	
 	foreach($arr2 as $dom) {
 		$logrotate.=$dom['homedir']."/logs/access_log ".$dom['homedir']."/logs/error_log ";
 	}
-#	$logrotate.=" /var/log/ehcp.log /var/log/apache_common_access_log {
-#}";
-	$logrotate.=" /var/log/ehcp.log /var/log/apache_common_access_log {\n\tweekly\n\tmissingok\n\trotate 52\n\tcompress\n\tdelaycompress\n\tnotifempty\n\tcreate 644 root root\n\tsharedscripts\n\tpostrotate\n\t\t/etc/init.d/apache2 reload\n\tendscript\n
+	$logrotate.=" /var/log/ehcp.log /var/log/apache_common_access_log {
 }";
 	passthru2('mkdir -p '.$this->ehcpdir.'/etc/logrotate.d/');
 	writeoutput($this->ehcpdir.'/etc/logrotate.d/ehcp',$logrotate,'w',True);
