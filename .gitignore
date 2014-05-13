@@ -2,3 +2,7 @@ bakup
 *.old
 webmail/data/sess*
 *.swp
+.buildpath
+.project
+.settings/
+
