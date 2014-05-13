@@ -1,3 +1,4 @@
 bakup
 *.old
 webmail/data/sess*
+*.swp
