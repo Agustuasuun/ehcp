@@ -18,8 +18,24 @@ class EroiApplication extends Application{
 		$res=$this->query("select domainname,homedir from domains where status='$this->status_active' and homedir<>''");
 		$str='';
 		foreach($res as $dom){
-			passthru2("mkdir -p ".$dom['homedir']."/httpdocs/webstats/");
-			$str.="webalizer -q -p -n www.".$dom['domainname']." -o ".$dom['homedir']."/httpdocs/webstats ".$dom['homedir']."/logs/access_log -R 100 TopReferrers -r ".$dom['domainname']." HideReferrer \n";
+			if ($this->miscconfig['enablecommonwebstats']=='') {
+				passthru2("mkdir -p ".$dom['homedir']."/httpdocs/webstats/");
+				$str.="webalizer -q -p -n www.".$dom['domainname']." -o ".$dom['homedir']."/httpdocs/webstats ".$dom['homedir']."/logs/access_log -R 100 TopReferrers -r ".$dom['domainname']." HideReferrer \n";
+			}else {
+				passthru2("mkdir -p " .$this->miscconfig["commonwebstatsdir"] ."/".$dom['domainname']);
+				$str.="webalizer -q -p -n www.".$dom['domainname']
+					. " -o "
+					. $this->miscconfig['commonwebstatsdir']
+					. "/"
+					. $dom['domainname']
+					. " "
+					. $dom['homedir']
+					. "/logs/access_log -R 100 TopReferrers -r "
+					. $dom['domainname']." HideReferrer \n";
+
+			}
+
+
 		}
 		echo $str;
 
@@ -94,5 +110,89 @@ class EroiApplication extends Application{
 
 		$this->output.="<br><br>$out1".$out."<br>";
 	}
+
+	function options(){
+		$this->requireAdmin();
+
+		global $edit,$_insert,$dnsip;
+		$this->getVariable(array('edit','_insert','dnsip','localip'));
+		#echo print_r2($this->miscconfig);
+
+		# new style: options as an array, so, easy addition of new options..
+		$optionlist=array(
+		array('updatehostsfile','checkbox','lefttext'=>'This machine is used for Desktop access too (Update hosts file with domains)','default'=>'Yes','checked'=>$this->miscconfig['updatehostsfile']),
+		array('localip','lefttext'=>'Local ip of server','default'=>$this->miscconfig['localip']),
+		array('dnsip','lefttext'=>'dnsip (outside/real/static ip of server)','default'=>$this->miscconfig['dnsip']),
+		array('dnsipv6','lefttext'=>'dnsip V6(outside/real/static V6 ip of server)','default'=>$this->miscconfig['dnsipv6'],'righttext'=>'Leave empty to disable (experimental even if enabled)'),
+		array('updatednsipfromweb','checkbox','lefttext'=>'Do you use dynamic ip/dns?','righttext'=>'Check this if your server is behind a dynamic IP','default'=>'Yes','checked'=>$this->miscconfig['updatednsipfromweb']),
+		array('banner','textarea','default'=>$this->miscconfig['banner']),
+		array('adminemail','lefttext'=>'Admin Email','default'=>$this->miscconfig['adminemail']),
+		array('defaulttemplate','default'=>$this->miscconfig['defaulttemplate']),
+		array('defaultlanguage','default'=>$this->defaultlanguage),
+		array('messagetonewuser','textarea','default'=>$this->miscconfig['messagetonewuser']),
+		array('disableeditdnstemplate','checkbox','lefttext'=>'Disable Custom http for non-admins','default'=>'Yes','checked'=>$this->miscconfig['disableeditdnstemplate'],'righttext'=>'This is a security measure to disable non-experienced users to break configs'),
+		array('disableeditapachetemplate','checkbox','lefttext'=>'Disable Custom dns for non-admins','default'=>'Yes','checked'=>$this->miscconfig['disableeditapachetemplate'],'righttext'=>'This is a security measure to disable non-experienced users to break configs'),
+		array('turnoffoverquotadomains','checkbox','lefttext'=>'Turn off over quota domains','default'=>'Yes','checked'=>$this->miscconfig['turnoffoverquotadomains']),
+		array('quotaupdateinterval','default'=>$this->miscconfig['quotaupdateinterval'],'righttext'=>'interval in hours'),
+		array('userscansignup','checkbox','default'=>'Yes','checked'=>$this->miscconfig['userscansignup'],'righttext'=>'disabled by default, can users sign up for domains/ftp? (you should approve/reject them in short time)'),
+		array('enablewebstats','checkbox','default'=>'Yes','checked'=>$this->miscconfig['enablewebstats'],'righttext'=>'enabled by default, this can use some of server resources, so, disabling it may help some slow servers to speed up'),
+		array('enablecommonwebstats','checkbox','default'=>'','checked'=>$this->miscconfig['enablewebstats'],'righttext'=>'enabled by default, this can use some of server resources, so, disabling it may help some slow servers to speed up'),
+		array('commonwebstatsdir','textarea','default'=>$this->miscconfig['commonwebstatsdir']),
+		array('enablewildcarddomain','checkbox','default'=>'Yes','checked'=>$this->miscconfig['enablewildcarddomain'],'righttext'=>'do you want xxxx.yourdomain.com to show your domain homepage? disabled by default, and shows server home, which is default index, ehcp home.')
+
+		#array('singleserverip','default'=>$this->miscconfig['singleserverip'])
+
+		);
+
+
+
+		if($_insert){
+			$this->requireNoDemo();
+			$old_webserver_type=$this->miscconfig['webservertype']."-".$this->miscconfig['webservermode'];
+			if($old_webserver_type=='') $old_webserver_type='apache2-nonssl';
+
+			$this->output.="Updating configuration...";
+			$this->validate_ip_address($dnsip);
+
+			foreach($optionlist as $option) {
+				global $$option[0]; # make it global to be able to read in getVariable function..may be we need to fix the global thing..
+				$this->getVariable($option[0]);
+				$this->setConfigValue($option[0],${$option[0]});
+			}
+
+			# options that use longvalue:
+			$this->setConfigValue("banner","",'value');# delete short value for banner, if there is any.. because longvalue is used for banner.
+			$this->setConfigValue("banner",$banner,'longvalue');
+
+			# operations that needs daemon or other settings.
+
+			if($dnsip<>$this->miscconfig['dnsip']){ # fix all dnsip related config if dnsip is changed...
+				$this->addDaemonOp("fixmailconfiguration",'','','','fix mail configuration'); # fixes postfix configuration, hope this works..yes, works...
+			}
+
+			if($defaultlanguage) { # update for current session too..
+				$_SESSION['currentlanguage']='';
+				$this->defaultlanguage=$this->currentlanguage=$defaultlanguage;
+			}
+
+			# load latest config again in this session.
+			$this->loadConfigWithDaemon(); # loads config for this session, to show below..
+			if($updatehostsfile<>'')  $this->addDaemonOp("syncdomains",'','','','sync domains-update hostsfile'); # updateHostsFile degistiginden dolayi, syncdomains gerekiyor..
+
+			$this->output.="..update complete.";
+
+		} elseif ($edit) {
+			$optionlist[]=array('op','default'=>__FUNCTION__,'type'=>'hidden');
+			$this->output.="<h2>Options:</h2><br>".inputform5($optionlist);
+
+		} else {
+			$this->output.="<h2>Options:</h2><br>".print_r3($this->miscconfig,"$this->th Option Name </th>$this->th Option Value </th>");
+		}
+
+		$this->showSimilarFunctions('options');
+		$this->debugecho(print_r2($this->miscconfig),3,false);
+	}
+
+
 
 }
