@@ -136,7 +136,7 @@ class EroiApplication extends Application{
 		array('quotaupdateinterval','default'=>$this->miscconfig['quotaupdateinterval'],'righttext'=>'interval in hours'),
 		array('userscansignup','checkbox','default'=>'Yes','checked'=>$this->miscconfig['userscansignup'],'righttext'=>'disabled by default, can users sign up for domains/ftp? (you should approve/reject them in short time)'),
 		array('enablewebstats','checkbox','default'=>'Yes','checked'=>$this->miscconfig['enablewebstats'],'righttext'=>'enabled by default, this can use some of server resources, so, disabling it may help some slow servers to speed up'),
-		array('enablecommonwebstats','checkbox','default'=>'','checked'=>$this->miscconfig['enablewebstats'],'righttext'=>'enabled by default, this can use some of server resources, so, disabling it may help some slow servers to speed up'),
+		array('enablecommonwebstats','checkbox','default'=>'','checked'=>$this->miscconfig['enablecommonwebstats'],'righttext'=>'This will allow webstats to be located somewhere else accessible by the filesystem'),
 		array('commonwebstatsdir','textarea','default'=>$this->miscconfig['commonwebstatsdir']),
 		array('enablewildcarddomain','checkbox','default'=>'Yes','checked'=>$this->miscconfig['enablewildcarddomain'],'righttext'=>'do you want xxxx.yourdomain.com to show your domain homepage? disabled by default, and shows server home, which is default index, ehcp home.')
 
