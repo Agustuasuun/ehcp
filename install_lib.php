@@ -168,7 +168,7 @@ function addifnotexists($what,$where) {
 		//echo "buldu... sorun yok. \n";
 		// already found, so, do not add
 	}
-	
+
 	#bekle(__FUNCTION__." bitti...");
 
 }
@@ -667,9 +667,11 @@ function installmailserver(){
 	sleep(10);
 	passthru2("/etc/init.d/mysql restart ");
 
-	aptget(array('postfix','postfix-mysql','postfix-doc','mysql-client','courier-authdaemon','courier-authmysql','courier-authlib-mysql','courier-pop','courier-pop-ssl','courier-imap','courier-imap-ssl','libsasl2-2','libsasl2','libsasl2-modules','libsasl2-modules-sql','sasl2-bin','libpam-mysql','openssl','phpmyadmin','pop-before-smtp','roundcube','roundcube-mysql')); # changed libsasl2-2 to libsasl2 **
+#	aptget(array('postfix','postfix-mysql','postfix-doc','mysql-client','courier-authdaemon','courier-authmysql','courier-authlib-mysql','courier-pop','courier-pop-ssl','courier-imap','courier-imap-ssl','libsasl2-2','libsasl2','libsasl2-modules','libsasl2-modules-sql','sasl2-bin','libpam-mysql','openssl','phpmyadmin','pop-before-smtp','roundcube','roundcube-mysql')); # changed libsasl2-2 to libsasl2 **
+	aptget(array('postfix','postfix-mysql','postfix-doc','mysql-client','libsasl2-2','libsasl2','libsasl2-modules','libsasl2-modules-sql','sasl2-bin','libpam-mysql','openssl','phpmyadmin')); # changed libsasl2-2 to libsasl2 **
+
 	passthru2("cp -rf /usr/share/phpmyadmin /var/www/new");
-	
+
 	# aptitude install postfix postfix-mysql postfix-doc mysql-client courier-authdaemon courier-authmysql courier-authlib-mysql courier-pop courier-pop-ssl courier-imap courier-imap-ssl libsasl2-2 libsasl2 libsasl2-modules libsasl2-modules-sql sasl2-bin libpam-mysql openssl phpmyadmin pop-before-smtp
 
 
@@ -682,16 +684,16 @@ function installmailserver(){
 
 function rebuild_nginx_config2($mydir){
 	global $app;
-	
+
 	passthru3("rm -rvf /etc/nginx/sites-enabled/*");
-	
+
 	#passthru2("cp $mydir/etc/nginx/nginx.conf /etc/nginx/nginx.conf");
-	
+
 	$conf=file_get_contents("$mydir/etc/nginx/nginx.conf"); # replace tags with actual values from class
 	$conf=str_replace(array('{wwwuser}','{wwwgroup}'),array($app->wwwuser,$app->wwwgroup),$conf);
 	file_put_contents("/etc/nginx/nginx.conf",$conf);
-	
-	
+
+
 	passthru2("cp $mydir/etc/nginx/default.nginx /etc/nginx/sites-enabled/default");
 	passthru2("cp $mydir/etc/nginx/apachetemplate.nginx $mydir/apachetemplate");
 	passthru2("cp $mydir/etc/nginx/apache_subdomain_template.nginx $mydir/apache_subdomain_template");
@@ -704,13 +706,13 @@ function install_nginx_webserver(){
 	#bekle();
 	aptget(array('nginx','php5-fpm','php5-cgi'));  # apt-get install nginx php5-fpm php5-cgi
 	copy("$mydir/etc/nginx/mime.types","/etc/nginx/mime.types");
-	
-	rebuild_nginx_config2(".");	
-	
+
+	rebuild_nginx_config2(".");
+
 	passthru2("/etc/init.d/php5-fpm stop");
-	passthru2("update-rc.d -f nginx remove");  # apache is default	
+	passthru2("update-rc.d -f nginx remove");  # apache is default
 	passthru2("/etc/init.d/nginx stop");
-	
+
 	echo "\nEnd nginx install\n";
 	#bekle();
 }
@@ -719,7 +721,7 @@ function installapacheserver($apacheconf=''){
 	global $app,$ehcpinstalldir;
 	echo "\nStarting apache2 webserver install (default webserver)\n";
 	#bekle(__FUNCTION__." basliyor..");
-	
+
 	aptget(array('libapache2-mod-php5','php5'));
 	addifnotexists("Include $ehcpinstalldir/apachehcp_subdomains.conf ", "/etc/apache2/apache2.conf");
 	addifnotexists("Include $ehcpinstalldir/apachehcp_auth.conf ", "/etc/apache2/apache2.conf");
@@ -735,7 +737,7 @@ function installapacheserver($apacheconf=''){
 		replacelineinfile("export APACHE_RUN_GROUP=","export APACHE_RUN_GROUP=".$app->wwwgroup,"/etc/apache2/envvars");
 	} else {
 		replacelineinfile("User ","User ".$app->wwwuser,"/etc/apache2/apache2.conf");
-		replacelineinfile("User ","Group ".$app->wwwgroup,"/etc/apache2/apache2.conf");		
+		replacelineinfile("User ","Group ".$app->wwwgroup,"/etc/apache2/apache2.conf");
 	}
 	#replacelineinfile('DocumentRoot /','DocumentRoot /var/www','/etc/apache2/sites-available/default');
 
@@ -804,7 +806,7 @@ function vsftpd_configuration($params){
 
 	# this function is written to allow changing password later, after install... it also makes configuration while install...
 	echo "configuring vsftpd:  (".__FUNCTION__.")\n";
-	
+
 	# burda sorun su: mysql password( fonksiyonu, mysqlde internal kullaniliyormus, bu yuzden normal programlarda kullanilmamaliymis..
 	# denedim, iki farklki mysqlde farkli sonuc uretebiliyor. bu nedenle, gercekten kullanilmamali..
 
@@ -814,7 +816,7 @@ function vsftpd_configuration($params){
 	";
 
 	writeoutput("/etc/pam.d/vsftpd",$filecontent,"w");
-	
+
 
 	$filecontent="
 listen=YES
@@ -1241,7 +1243,7 @@ function installfinish() {
 	passthru2("/etc/init.d/mysql restart ");
 	sleep(1);
 	passthru2("/etc/init.d/mysql start ");
-	passthru2("update-rc.d -f nginx remove");
+#	passthru2("update-rc.d -f nginx remove");
 	passthru2("update-rc.d apache2 defaults");
 	passthru("/etc/init.d/apparmor stop");
 
