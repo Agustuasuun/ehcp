@@ -193,6 +193,33 @@ class EroiApplication extends Application{
 		$this->debugecho(print_r2($this->miscconfig),3,false);
 	}
 
+	function serverStatus(){
+		$this->requireAdmin();
+		#-------------- deconectat edit ---------------------------------------------------------
+		#  ehcpdeveloper note: in fact, these html should be abstracted from source. left as of now.
 
+		$this->output.="<div class='footer'>(It is normal that only one of apache2,nginx.. etc. webservers are running)<br><table> ";
+		$this->check_program_service('apache2','dostartapache2','dostopapache2','dorestartapache2');
+		#$this->check_program_service('nginx','dostartnginx','dostopnginx','dorestartnginx');
+		$this->check_program_service('mysqld','dostartmysqld','dostopmysqld','dorestartmysqld');
+		$this->check_program_service('vsftpd','dostartvsftpd','dostopvsftpd','dorestartvsftpd');
+		$this->check_program_service('bind','dostartbind','dostopbind','dorestartbind');
+		$this->check_program_service('postfix','dostartpostfix','dostoppostfix','dorestartpostfix');
+		$this->output.="</table></div> ";
+
+		$systemStatus=$this->executeProg3($this->ehcpdir."/misc/serverstatus.sh"); #moved the bash script in a separate file; this way it will be easyer to edit.
+
+		$this->output.="<div class=\"footer\"><pre>".$systemStatus."</pre></div>";
+		#-------------- end deconectat edit -----------------------------------------------------
+
+
+		$topoutput=$this->executeProg3("top -b -n 1 | head -40");
+		$this->output.="<hr><div align=left>Top output: <br> <pre>$topoutput</pre></div>";
+
+		$topoutput=$this->executeProg3("tail -200 /var/log/syslog");
+		$this->output.="<hr><div align=left>Syslog (to see this, you must chmod a+r /var/log/syslog on server console, <a target=_blank href='?op=adjust_system'>adjust system for this</a>): <br> <pre>$topoutput</pre></div>";
+
+		return True;
+	}
 
 }

@@ -15,10 +15,10 @@
 ehcpversion="0.30.8"
 
 echo
-echo 
+echo
 #echo "Please Wait... initializing.a	  If something is very slow, please report on our site."
 echo
-echo 
+echo
 chmod -Rf a+r *
 
 if [ "$1" == "noapt" ] ; then
@@ -47,7 +47,7 @@ function installyum () {
 # Initial Welcome Screen
 
 function ehcpHeader() {
-	echo 
+	echo
 	echo
 	echo "STAGE 1"
 	echo "====================================================================="
@@ -57,10 +57,10 @@ function ehcpHeader() {
 	echo "-------------------------www.ehcp.net--------------------------------"
 	echo "---------------------------------------------------------------------"
 	echo
-	echo 
+	echo
 	echo "Now, ehcp pre-installer begins, a series of operations will be performed and main installer will be invoked. "
 	echo "if any problem occurs, refer to www.ehcp.net forum section, or contact me, mail/msn: info@ehcp.net"
-	
+
 	echo "Pleaes be patient, press enter to continue"
 	read
 	echo
@@ -123,12 +123,12 @@ function infoMail(){
 # Function to be called when installing packages, by Marcel <marcelbutucea@gmail.com>
 
 function installPack(){
-	
+
 	if [ -n "$noapt" ] ; then  # skip install
 		echo "skipping apt-get install for:$1"
 		return
 	fi
-	
+
 	if [ $distro == "ubuntu" ] || [ $distro == "debian" ];then
 		# first, try to install without any prompt, then if anything goes wrong, normal install..
 		apt-get -y --no-remove --allow-unauthenticated install $1
@@ -166,11 +166,11 @@ function aptgetInstall(){
 	cmd="apt-get -y --no-remove --allow-unauthenticated install $1"
 	logToFile "$cmd"
 	$cmd
-	
+
 	if [ $? -ne 0 ]; then
 		cmd="apt-get --allow-unauthenticated install $1"
 		logToFile "$cmd"
-		$cmd	
+		$cmd
 	fi
 
 }
@@ -188,7 +188,7 @@ function checkDistro() {
 function checkUser() {
 		if [ `whoami` != "root" ];then
 				echo "you are $who, you have to be root to use ehcp installation program.  switching to root mode, please enter password  or re-run install.sh as root"
-				sudo $0 # restart this with superuser-root privileges				
+				sudo $0 # restart this with superuser-root privileges
 				exit
 		fi
 }
@@ -259,16 +259,16 @@ mkdir /etc/ehcp
 aptget_Update
 
 aptgetInstall python-software-properties # for add-apt-repository
-add-apt-repository ppa:brianmercer/php  # for nginx
+#add-apt-repository ppa:brianmercer/php  # for nginx
 
 aptget_Update # for above ppa
 
 
 #echo "`date`: initializing.h"
 # apt-get upgrade  # may be cancelled later... this may be dangerous... server owner should do it manually...
-aptgetInstall php5 
-aptgetInstall php5-mysql 
-aptgetInstall php5-cli 
+aptgetInstall php5
+aptgetInstall php5-mysql
+aptgetInstall php5-cli
 aptgetInstall sudo
 aptgetInstall wget
 aptgetInstall aptitude
@@ -290,8 +290,8 @@ echo "now running install_1.php "
 #infoMail ehcp_2_install-starting-install_1.php
 php install_1.php $noapt
 
-echo 
-echo 
+echo
+echo
 echo "STAGE 3"
 echo "====================================================================="
 echo "now running install_2.php "
