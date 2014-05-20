@@ -1089,6 +1089,7 @@ passthru("/etc/init.d/apparmor stop");
 passthru("mkdir -p /etc/ehcp");
 #passthru("apt-get update"); # already updated in install.sh
 passthru("cp /etc/apt/sources.list /etc/apt/sources.list.bck.ehcp");
+# should I comment this line out?  it enables cdrom access!
 editlineinfile(array('#deb','##deb','# deb'),array('deb','deb','deb'),'/etc/apt/sources.list');
 # passthru("apt-get update");
 
