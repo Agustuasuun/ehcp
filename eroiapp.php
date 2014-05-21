@@ -222,4 +222,62 @@ class EroiApplication extends Application{
 		return True;
 	}
 
+	function syncDomains($file='') {
+
+		$this->requireCommandLine(__FUNCTION__);
+
+		$success=parent::syncDomains($file='');
+
+		# now we build the backups configuration, using hints from the actual ehcp backup functions
+		# get backupdirname
+
+		$backupdirname=$this->miscconfig['commonbackupconfdir'];
+		$systemhostname=$this->misconfig['systemhostname'];
+		$customer_template_filename=$backupdirname . "/customertemplate";
+
+		$customer_template_file=file_get_contents($customer_template_filename);
+
+
+		# outputfilename will be of the form <ftpusername>.conf
+		#$file=;
+
+		$filt=andle($this->activefilt,"(serverip is null or serverip='') and homedir<>''"); # exclude where serverip is set, that is, for remote dns hosted only domains..
+		$arr=$this->getDomains($filt);
+		if($this->debuglevel>0) print_r($arr);
+
+
+		$arr2=array();
+
+
+		foreach($arr as $dom) {
+			#reset template
+			$customer_template=$customer_template_file;
+			$domainname=$dom['domainname'];
+			$homedir=$dom['homedir'];
+			$databases="";
+			# get database info
+			$dbs=$this->query("select * from mysqldb where domainname like '$domainname'");
+
+			foreach($dbs as $line) {
+				$databases .= $line['dbname'] . " "; #note space at the end!
+			}
+
+			$mysqlusers=$this->query("select * from mysqlusers where domainname like '$domainname' ");
+
+			# get the ftpusername:
+			$ftpaccounts=$this->query("select * from ftpaccounts where domainname like '$domainname' ");
+			$temp=$ftpaccounts[0];
+			$ftpuser=$temp['ftpusername'];
+			$customer_configfile=$backupdirname . "/" . $systemhostname . "/customertest/" . $ftpuser . ".conf";
+
+			$customer_template=str_replace(array('eroi_ftpuser','eroi_dblist','eroi_domain','eroi_homedir'),array($ftpuser,$databases,$domainname,$homedir ),$customer_template);
+
+			#use writeoutput2 to write config file!
+			$res=writeoutput2($customer_configfile, $customer_template, 'w', false );
+
+
+		}
+		return $success;
+	}
+
 }
